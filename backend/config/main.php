@@ -45,7 +45,9 @@ return [
             'rules' => [
             ],
         ],
-
+        'assetManager' => [
+            'appendTimestamp' => true
+        ]
     ],
     'params' => $params,
 ];
