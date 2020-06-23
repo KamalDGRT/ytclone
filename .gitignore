@@ -43,4 +43,4 @@ phpunit.phar
 /backend/web/robots.txt
 
 # ignore uploaded videos
-/frontend/web/storage/videos/
+/frontend/web/storage/
