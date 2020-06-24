@@ -46,6 +46,9 @@ class VideoController extends Controller
         $this->layout = 'main';
         $dataProvider = new ActiveDataProvider([
             'query' => Video::find()->with('createdBy')->published()->latest(),
+//            'pagination' => [
+//                'pageSize' => 20
+//            ]
         ]);
 
         return $this->render('index', [
