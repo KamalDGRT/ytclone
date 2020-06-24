@@ -17,7 +17,6 @@ aside .nav-pills .nav-link {
     color: #444444;
 }
 
-
 aside .nav-pills .nav-link:hover {
     background: rgba(0, 0, 0, 0.05);
 }
@@ -27,6 +26,7 @@ aside .nav-pills .nav-link.active {
     color: #b90000;
     border-left: 4px solid #b90000;
 }
+
 .content-wrapper{
     margin-bottom: 200px;
 }

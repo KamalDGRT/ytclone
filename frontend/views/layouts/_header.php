@@ -1,9 +1,4 @@
 <?php
-/**
- * User: TheCodeholic
- * Date: 4/17/2020
- * Time: 9:20 AM
- */
 
 use yii\bootstrap4\Nav;
 use yii\bootstrap4\NavBar;

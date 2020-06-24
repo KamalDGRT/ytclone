@@ -12,22 +12,23 @@ use yii\imagine\Image;
 /**
  * This is the model class for table "{{%video}}".
  *
- * @property string $video_id
- * @property string $title
+ * @property string      $video_id
+ * @property string      $title
  * @property string|null $description
  * @property string|null $tags
- * @property int|null $status
- * @property int|null $has_thumbnail
+ * @property int|null    $status
+ * @property int|null    $has_thumbnail
  * @property string|null $video_name
- * @property int|null $created_at
- * @property int|null $updated_at
- * @property int|null $created_by
+ * @property int|null    $created_at
+ * @property int|null    $updated_at
+ * @property int|null    $created_by
  *
- * @property User $createdBy
+ * @property User        $createdBy
+ * @property \common\models\VideoLike[]        $likes
+ * @property \common\models\VideoLike[]        $dislikes
  */
 class Video extends \yii\db\ActiveRecord
 {
-
     const STATUS_UNLISTED = 0;
     const STATUS_PUBLISHED = 1;
 
@@ -119,6 +120,32 @@ class Video extends \yii\db\ActiveRecord
     }
 
     /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getViews()
+    {
+        return $this->hasMany(VideoView::class, ['video_id' => 'video_id']);
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getLikes()
+    {
+        return $this->hasMany(VideoLike::class, ['video_id' => 'video_id'])
+            ->liked();
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getDislikes()
+    {
+        return $this->hasMany(VideoLike::class, ['video_id' => 'video_id'])
+            ->disliked();
+    }
+
+    /**
      * {@inheritdoc}
      * @return \common\models\query\VideoQuery the active query used by this AR class.
      */
@@ -188,4 +215,19 @@ class Video extends \yii\db\ActiveRecord
         }
     }
 
+    public function isLikedBy($userId)
+    {
+        return VideoLike::find()
+            ->userIdVideoId($userId, $this->video_id)
+            ->liked()
+            ->one();
+    }
+
+    public function isDislikedBy($userId)
+    {
+        return VideoLike::find()
+            ->userIdVideoId($userId, $this->video_id)
+            ->disliked()
+            ->one();
+    }
 }
