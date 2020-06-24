@@ -10,6 +10,8 @@ return [
     'id' => 'app-frontend',
     'basePath' => dirname(__DIR__),
     'bootstrap' => ['log'],
+    'defaultRoute' => '/video/index',
+    'layout' => 'auth',
     'controllerNamespace' => 'frontend\controllers',
     'components' => [
         'request' => [
@@ -41,9 +43,14 @@ return [
             'enablePrettyUrl' => true,
             'showScriptName' => false,
             'rules' => [
-                '/' => 'site/index'
+                '/c/<username>' => '/channel/view',
+                '/v/<id>' => '/video/view',
             ],
         ],
+
+        'assetManager' => [
+            'appendTimestamp' => true
+        ]
 
     ],
     'params' => $params,
